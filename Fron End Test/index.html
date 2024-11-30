@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front End Test</title>
+    <style>
+    a {
+    text-decoration: none; 
+    color: blue;
+}
+    a:hover {
+    color: red; 
+}
+    a:active {
+    color: green;
+}
+
+
+    h1{
+        font-family: Arial, sans-serif;
+        text-shadow: 2px 2px 5px;
+    }
+    p{
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-align: justify;
+    }
+
+    div{
+        border: 1px solid gray;
+        padding: 20px;
+        margin: 10px;
+        max-width: 300px;
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    button{
+        background-color: blue;
+        color: white;
+        width: 150px;
+        height: 50px;
+    }
+    button:hover{
+        color: darkblue;
+        transition: 0.3s;
+        transform: scale(1.2);
+    }
+
+    .gallery{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    
+    }
+    @media (max-width:600px){
+        .gallery{
+            grid-template-columns: 1fr;
+        }
+    }
+    .box{
+        background-color:aqua;
+        width: 90px;
+        height: 90px;
+        animation-name: slide;
+        position: relative;
+    }
+    @keyframes slide{
+        0% { transform: translateX(0); }
+        100%{ transform: ;}
+    }
+
+    </style>
+</head>
+<body>
+    <!-- q1  -->
+    <ul>
+        <li><a href="#link1">Link 1</a></li>
+        <li><a href="#link2">Link 2</a></li>
+        <li><a href="#link3">Link 3</a></li>
+        <li><a href="#link4">Link 4</a></li>
+        <li><a href="#link5">Link 5</a></li>
+    </ul>
+
+    <!-- q2 -->
+
+    <h1>Simple Webpage</h1>
+    <p class="q2">This is a text for simple Webpage using paragraph</p>
+
+    <!-- q3 -->
+
+    <div class="card">
+
+    </div>
+
+    <!-- q4 -->
+
+    <nav>
+        <a href="" class="">Home</a>
+        <a href="" class="">About</a>
+        <a href="" class="">Contact</a>
+    </nav>
+
+
+    <!-- q5 -->
+     <div class="gallery">
+        <img height="100px" width="100px" src="https://preview.redd.it/st7se5vl3pm71.png?width=1080&crop=smart&auto=webp&s=216e1586e43cdf2d7e3a4f1662573dfd7ee15517" alt="">
+        <img height="100px" width="100px" src="https://preview.redd.it/wj6tvrtm3pm71.png?width=1920&format=png&auto=webp&s=a70bda74e89d15a6dfb42e50ff71178495031f58" alt="">
+        <img height="100px" width="100px" src="https://preview.redd.it/8hsrjdsn3pm71.png?width=1920&format=png&auto=webp&s=f6ea3e53b8c100ca610be9d9808be167bd25cd9c" alt="">
+        <img height="100px" width="100px" src="https://preview.redd.it/39l5clfq3pm71.png?width=1920&format=png&auto=webp&s=dcf9972f32b3d1fb3ad7ed5a445ab0d403add7c2" alt="">
+     </div>
+
+
+    <!-- q6 -->
+
+    <button>Text</button><br><br>
+
+    <!-- q7 -->
+
+    <button>Hover Me</button>
+
+
+</body>
+</html>
