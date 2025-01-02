@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async & Await</title>
+</head>
+
+<body>
+    <script>
+        function fetchUserData() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve('User data');
+                }, 1000);
+            });
+        }
+
+        function fetchPostData() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve('Post data');
+                }, 500);
+            });
+        }
+
+        async function fetchData() {
+            try {
+                const userData = await fetchUserData();
+                console.log(userData);
+
+                const postData = await fetchPostData();
+                console.log(postData);
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
+
+        fetchData();
+
+        fetchUserData()
+            .then((x)=>{
+                console.log('User data fetched');
+                return fetchPostData();
+            }) 
+            .then((y)=>{
+                console.log('post data');
+            }) 
+            .catch((error)=>{
+                console.log('error');
+            }) 
+        
+    </script>
+</body>
+
+</html>

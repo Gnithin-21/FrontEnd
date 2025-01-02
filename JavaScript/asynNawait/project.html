@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            border: 3px solid black;
+            margin: 20px;
+            padding: 10px;
+            width: fit-content;
+            box-shadow: 3px 3px 3px black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+
+        <div id="quote">
+            <div id="author"></div>
+            <div id="text"></div>
+        </div>
+    </center>
+    <button onclick="getQuote()">New Quote</button>
+    <script>
+        const author = document.getElementById('author');
+        const text = document.getElementById('text');
+
+        async function getQuote() {
+            try {
+                const response = await fetch('https://jacintodesign.github.io/quotes-api/data/quotes.json');
+                if (!response.ok) throw new Error('Failed to fetch quotes');
+                const data = await response.json();
+                const random = data[Math.floor(Math.random() * data.length)];
+                author.textContent = random.author;
+                text.textContent = random.text;
+            } catch (error) {
+                console.error('Error fetching quote:', error);
+            }
+        }
+        getQuote();
+    </script>
+</body>
+
+</html>

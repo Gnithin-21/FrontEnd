@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // class car {
+        //     constructor(brand, model) {
+        //         this.brand = brand;
+        //         this.model = model;
+        //     }
+        //     start() {
+        //         console.log(`${this.brand} ${this.model} is started`);
+        //     }
+        //     drive() {
+        //         console.log(`${this.brand} ${this.model} is driving`);
+        //     }
+        // }
+        // const myCar = new car('lamborghini', 'urus')
+        // myCar.start();
+        // myCar.drive();
+
+
+        // class electricCar extends car{
+        //     constructor(brand, model, batteryCapacity) {
+        //         super(brand, model);
+        //         this.batteryCapacity = batteryCapacity;
+        //     }
+        //     charge(){
+        //         console.log(`${this.brand} ${this.model} is charging`);
+        //     }
+        // }
+        // const myElectriccar=new electricCar('Lamborghini','Urus','1000')
+        // myElectriccar.charge();
+
+        // class multiuti{
+        //     static square(number){
+        //         return number*number;
+        //     }
+        // }
+        // console.log(multiuti.square(5));
+
+        // class User{
+        //     #password;
+        //     constructor(username,password){
+        //         this.username=username;
+        //         this.#password=password;
+        //     }
+        //     get password(){
+        //         return this.#password;
+        // }
+        // const user = new User("admin","secret");
+        // console.log(user.get(password));
+        // }
+
+        function sumTh() {
+            let sum = 0;
+            for (let i = 0; i < n; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+        let n = 1000
+        let k = sumTh(n)
+        const start = performance.now()
+        console.log(sumTh());
+        const end = performance.now()
+        console.log(start)
+        console.log(end)
+        console.log(end - start)
+    </script>
+</body>
+
+</html>

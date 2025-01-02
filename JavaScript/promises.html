@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const myPromise = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve('Promise fulfilled after 2 seconds');
+        //     }, 2000);
+        // });
+
+        // myPromise
+        //     .then((message) => {
+        //         console.log(message);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+
+        // console.log(ans)
+
+        // let ans = new Promise((smaller, greater) => {
+        //     let ans = Math.random()
+        //     console.log(ans)
+        //     if (ans < 0.5) {
+        //         smaller("less than 0.5")
+        //     }
+        //     else {
+        //         greater("greater than 0.5")
+        //     }
+        // });
+        // ans
+        // .then((message)=>{
+        //     console.log(message)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // })
+
+
+
+
+
+
+        let First = new Promise((resolve, reject) => {
+            setTimeout(() => reject("First"), 1000);
+        });
+        let Second = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("Second"), 2000);
+        });
+        let Third = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("Third"), 3000);
+        });
+
+        Promise.race([First, Second, Third])
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+
+
+        Promise.allSettled([First, Second, Third])
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+        Promise.all([First, Second, Third])
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        Promise.any([First, Second, Third])
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    </script>
+</body>
+
+</html>

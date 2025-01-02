@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Manipulation Example</title>
+</head>
+<body>
+    <h1 id="elem1">Welcome</h1>
+    <h1 id="elem1">Welcome</h1>
+    <div class="elem2">
+        something
+    </div>
+    <p>Lorem, ipsum dolor.</p>
+    <p>Lorem, ipsum dolor.</p>
+    <h1>Lorem ipsum dolor sit amet.</h1>
+    
+    <script>
+        var elem1 = document.getElementById("elem1");
+        elem1.style.backgroundColor='orange';
+
+        var elem2 = document.getElementsByClassName('elem2');
+        elem2[0].style.backgroundColor='yellow';
+
+        var elem3 = document.getElementsByTagName('p')
+        elem3[1].style.backgroundColor='aqua';
+
+        let color=document.querySelectorAll('#elem1')
+        color[1].style.backgroundColor='red';
+    </script>
+</body>
+</html>

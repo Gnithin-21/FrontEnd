@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let animal= {
+        //     eats: "food"
+        // };
+
+        // let rabbit={
+        //     jumps: "wall"
+        // };
+
+        // let longEar={
+        //     earlength:10
+        // }
+        // rabbit.__proto__=animal;
+        // longEar.__proto__=rabbit;
+        // console.log(longEar.eats)
+        
+
+        // let animal ={
+        //     walk(){
+        //         console.log("Animal walk")
+        //     }
+        // }
+        // let rabbit={
+        //     __proto__:animal
+        // };
+        // rabbit.walk()=function(){
+        //     console.log('rabbit hops');
+        // }
+
+        // rabbit.walk();
+        // console.log
+
+
+        // let name1={
+        //     name:"Ram"
+        // }
+        // let name2={
+        //     name:"Rakesh"
+        // }
+        // function ramrakesh(){
+        //     console.log(name1.name);
+        // }
+
+        // ramrakesh.call(name,"Hello","How are you7");
+        // ramrakesh.apply(name,"hello")
+
+        var employee1={firstname:"Shanker",lastname:"Konidela"};
+        var employee2={firstname:"Ram",lastname:"Konidela"};
+        function invite(greeting1,greeting2){
+            console.log(greeting1+" "+employee1.firstname+" "+employee2.lastname);
+        }
+        invite.call(employee1,"Hello","How are you");
+        invite.apply(employee1,["Hello","How are you"]);
+        var inviteEmployee2 = invite.bind(employee2);
+        inviteEmployee2("Hello","How are you");
+    </script>
+</body>
+</html>
