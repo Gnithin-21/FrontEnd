@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canvas POC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Montserrat;
+      font-weight: 600;
+
+    }
+
+    .canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #drawing-area {
+      border: 1px solid black;
+      margin: 1rem 0;
+      border-radius: 5px;
+      /* width: 70vw;
+        height: 80vh; */
+    }
+
+    .canvas-container__tools {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tool {
+      cursor: pointer;
+      border: 1px solid black;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      margin: 0.5rem;
+    }
+
+    .pencil {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .pencil::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .pencil:hover::before {
+      width: 9em;
+    }
+
+    .eraser {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .eraser::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .eraser:hover::before {
+      width: 9em;
+    }
+
+    .clear {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .clear::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .clear:hover::before {
+      width: 9em;
+    }
+
+    .oval {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .oval::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .oval:hover::before {
+      width: 9em;
+    }
+
+    .rect {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .rect::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .rect:hover::before {
+      width: 9em;
+    }
+
+    .circle {
+      box-shadow: 2px 2px 2px black;
+      border-radius: 12px;
+      font-weight: 600;
+      border: none;
+    }
+
+    .circle:hover {
+      background-color: rgb(201, 190, 190);
+    }
+
+    .circle {
+      width: 9em;
+      height: 3em;
+      border-radius: 30em;
+      font-size: 15px;
+      font-family: inherit;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+    }
+
+    .circle::before {
+      content: '';
+      width: 0;
+      height: 3em;
+      border-radius: 30em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+      transition: .5s ease;
+      display: block;
+      z-index: -1;
+    }
+
+    .circle:hover::before {
+      width: 9em;
+    }
+
+    .color-picker {
+      border-radius: 50%;
+      border: none;
+      height: 3rem;
+      width: 3rem;
+      padding: 0.5rem;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="canvas-container">
+    <canvas id="drawing-area" height="580" width="900"></canvas>
+    <div class="canvas-container__tools">
+      <button class="tool pencil" onclick="selectPen()">
+
+        Pencil
+      </button>
+
+      <button class="tool eraser" onclick="toggleEraser()">
+
+        Eraser
+      </button>
+
+
+
+      <button class="tool clear" onclick="clearCanvas()">
+        Clear
+
+      </button>
+      <button class="tool oval" onclick="enableOvalMode()">
+        Oval
+
+      </button>
+      <button class="tool rect" onclick="enableRectangleMode()">
+        Rectangle
+
+
+      </button>
+      <button class="tool circle" onclick="enableCircleMode()">
+        Circle
+
+      </button>
+      <input type="color" id="colorPicker" class="color-picker" onchange="changeColor(event)" />
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.querySelector("#drawing-area");
+    let ctx = canvas.getContext("2d");
+    let drawing = false;
+    let eraser = false;
+    let ovalMode = false;
+    let rectMode = false;
+    let circleMode = false;
+    let currentColor = "#000000";
+    let startX, startY;
+
+    function drawOval(x, y, w, h) {
+      ctx.beginPath();
+      ctx.ellipse(x + w / 2, y + h / 2, Math.abs(w / 2), Math.abs(h / 2), 0, 0, 2 * Math.PI);
+      ctx.fillStyle = currentColor;
+      ctx.fill();
+      ctx.strokeStyle = currentColor;
+      ctx.stroke();
+    }
+
+    function drawRectangle(x, y, width, height) {
+      ctx.fillStyle = currentColor;
+      ctx.fillRect(x, y, width, height);
+    }
+
+    function drawCircle(x, y, radius) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = currentColor;
+      ctx.fill();
+      ctx.strokeStyle = currentColor;
+      ctx.stroke();
+    }
+
+    canvas.addEventListener("mousedown", (e) => {
+      startX = e.offsetX;
+      startY = e.offsetY;
+      drawing = true;
+      if (!ovalMode && !rectMode && !circleMode) {
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+      }
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+      if (!drawing) return;
+      const x = e.offsetX;
+      const y = e.offsetY;
+
+      if (eraser) {
+        ctx.clearRect(x, y, 10, 10);
+      } else if (!ovalMode && !rectMode && !circleMode) {
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = currentColor;
+        ctx.stroke();
+      }
+    });
+
+    canvas.addEventListener("mouseup", (e) => {
+      if (ovalMode) {
+        drawOval(startX, startY, e.offsetX - startX, e.offsetY - startY);
+      } else if (rectMode) {
+        drawRectangle(startX, startY, e.offsetX - startX, e.offsetY - startY);
+      } else if (circleMode) {
+        const radius = Math.sqrt(Math.pow(e.offsetX - startX, 2) + Math.pow(e.offsetY - startY, 2));
+        drawCircle(startX, startY, radius);
+      }
+      drawing = false;
+    });
+
+    const selectPen = () => {
+      eraser = false;
+      ovalMode = false;
+      rectMode = false;
+      circleMode = false;
+    };
+
+    const toggleEraser = () => {
+      eraser = true;
+      ovalMode = false;
+      rectMode = false;
+      circleMode = false;
+    };
+
+    const enableOvalMode = () => {
+      ovalMode = true;
+      eraser = false;
+      rectMode = false;
+      circleMode = false;
+    };
+
+    const enableRectangleMode = () => {
+      rectMode = true;
+      ovalMode = false;
+      eraser = false;
+      circleMode = false;
+    };
+
+    const enableCircleMode = () => {
+      circleMode = true;
+      rectMode = false;
+      ovalMode = false;
+      eraser = false;
+    };
+
+    const clearCanvas = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      eraser = false;
+      ovalMode = false;
+      rectMode = false;
+      circleMode = false;
+    };
+
+    const changeColor = (event) => {
+      currentColor = event.target.value;
+    };
+  </script>
+</body>
+
+</html>
